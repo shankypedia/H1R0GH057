@@ -1,0 +1,144 @@
+ó
+Z„‡Vc           @   sõ   d  d l  Z  d  d l Z d  d l Z d  d l Z d  d l Z d  d l Z d  d l m Z d Z d „  Z	 d d d „  ƒ  YZ
+ d e
+ f d „  ƒ  YZ d	 e
+ f d
+ „  ƒ  YZ
+ d
+ e
+ f d „  ƒ  YZ d
+ e
+ f d „  ƒ  YZ d „  Z e d k rñ e ƒ  n  d S(   iÿÿÿÿN(   t   OptionParseri   c         C   sº   d } t  |  ƒ d } xN t d t  |  ƒ | d ƒ D]0 } | t |  | ƒ t |  | d ƒ d >7} q3 W| rˆ | t |  | d ƒ 7} n  x  | d ?rª | d @| d ?} q‹ W| d @} | S(   Ni    i   i   i   i   iÿÿ  (   t   lent   ranget   ord(   t   datat   st   nt   i(    (    s-   /root/Desktop/webby/dos/dos/Saddam/pinject.pyt   checksum
+   s    #.
+
+t   layerc           B   s   e  Z RS(    (   t   __name__t
+   __module__(    (    (    s-   /root/Desktop/webby/dos/dos/Saddam/pinject.pyR	      s   t   ETHERc           B   s   e  Z e d  „ Z d „  Z RS(   c         C   s   | |  _  | |  _ | |  _ d  S(   N(   t   srct   dstt   type(   t   selfR
+   R   R   (    (    s-   /root/Desktop/webby/dos/dos/Saddam/pinject.pyt   __init__   s    		c         C   s%   t  j d |  j |  j |  j ƒ } | S(   Ns   !6s6sH(   t   structt   packR   R
+   R   (   R   t   ethernet(    (    s-   /root/Desktop/webby/dos/dos/Saddam/pinject.pyR      s
+    	(   R
+   R
+   t   ETH_P_IPR   R   (    (    (    s-   /root/Desktop/webby/dos/dos/Saddam/pinject.pyR      s   t   IPc           B   s,   e  Z d  e j d „ Z d „  Z d „  Z RS(   t    c         C   sŒ   d |  _  d |  _ d |  _ d t | ƒ |  _ d |  _ d |  _ d |  _ d |  _ | |  _	 d |  _
+ t
+ j | ƒ |  _
+ t
+ j | ƒ |  _ d  S(   Ni   i   i    i   iÿ   i   (   t   versiont   ihlt   tosR   t   tlt   idt   flagst   offsett   ttlt   protocolR   t   sockett	   inet_atont   sourcet
+   destination(   R   R#   R$   t   payloadt   proto(    (    s-   /root/Desktop/webby/dos/dos/Saddam/pinject.pyR   '   s    									c         C   sÎ   |  j  d >|  j } |  j d >|  j } t j d | |  j |  j |  j | |  j	 |  j
+ |  j
+ |  j |  j
+ ƒ
+ } t
+ | ƒ |  _
+ t j d | |  j |  j |  j | |  j	 |  j
+ t j |  j
+ ƒ |  j |  j
+ ƒ
+ } | S(   Ni   i
+   s
+   !BBHHHBBH4s4s(   R   R   R   R   R   R   R   R   R   R   R    R   R#   R$   R!   t   htons(   R   t   ver_ihlt   flags_offsett	   ip_header(    (    s-   /root/Desktop/webby/dos/dos/Saddam/pinject.pyR   4   s4    		c      
+   C   s?  t  ƒ  } t | d ƒ d @d | _ t j d | | j  ƒ } | d d ?| _ | d | _ | d | _ | d | _ | d d ?| _	 | d d	 @| _
+ | d
+ | _
+ | d
+ | _ t
+ | d ƒ | _ t j | d
+ ƒ | _ t j | d ƒ | _ | j | j | j | j | j | j	 | j
+ | j
+ | j | j | j g
+ | _ | S(   Ni    i   i   s
+   !BBHHHBBH4s4si   i   i   i
+   iÿ  i   i   i   i   i	   (   R	   R   R   R   t   unpackt   verR   t   lengtht   idsR   R   R   R    t   hexR   R!   t	   inet_ntoaR
+   R   t   list(   R   t   packett   _ipt   iph(    (    s-   /root/Desktop/webby/dos/dos/Saddam/pinject.pyR+   O   s4    	
+
+
+
+
+(   R
+   R
+   R!   t
+   IPPROTO_TCPR   R   R+   (    (    (    s-   /root/Desktop/webby/dos/dos/Saddam/pinject.pyR   &   s   
+	t   TCPc           B   s#   e  Z d  „  Z d „  Z d „  Z RS(   c         C   s   | |  _  | |  _ d |  _ d |  _ d |  _ d |  _ d |  _ d |  _ d |  _ d |  _	 d |  _
+ d |  _
+ t j
+ d ƒ |  _ d |  _ d |  _ d |  _ d  S(   Ni
+   i    i   i   iÐ  R   (   t   srcpt   dstpt   seqnt   acknR   t   reservedt   urgt   ackt   psht   rstt   synt   finR!   R'   t   windowR   t   urgpR%   (   R   R7   R8   (    (    s-   /root/Desktop/webby/dos/dos/Saddam/pinject.pyR   m   s     														c   
+   
+   C   s_  |  j  d >d } |  j |  j d >|  j d >|  j d >|  j d >|  j d >} t j d |  j	 |  j
+ |  j
+ |  j | | |  j
+ |  j |  j ƒ
+ } | } | } d } t j }	 t | ƒ t |  j ƒ }
+ t j d | | | |	 |
+ ƒ }
+ |
+ | |  j }
+ t |
+ ƒ } t j d	 |  j	 |  j
+ |  j
+ |  j | | |  j
+ ƒ } | t j d
+ | ƒ t j d
+ |  j ƒ 7} | S(   Ni   i    i   i   i   i   s
+   !HHLLBBHHHs   !4s4sBBHs   !HHLLBBHt   Hs   !H(   R   RA   R@   R?   R>   R=   R<   R   R   R7   R8   R9   R:   RB   R   RC   R!   R5   R   R%   (
+   R   R#   R$   t
+   data_offsetR   t
+   tcp_headert	   source_ipt   destination_ipR;   R    t   total_lengthR>   t   tcp_checksum(    (    s-   /root/Desktop/webby/dos/dos/Saddam/pinject.pyR   ~   sF    @					)c      
+   C   s  i d d 6d d 6d d 6d d 6d	 d
+ 6d
+ d 6} t  ƒ  } t | d
+ ƒ d ?d | _ | d | j !| _ | | j | _ t j d | d  ƒ } | d | _ | d | _ | d
+ | _	 t
+ | d ƒ | _
+ d | _ x2 | D]* } | d | @r× | j | | 7_ q× q× W| d | _
+ t
+ | d ƒ | _ | d | _ | j | j | j	 | j
+ | j | j | j
+ | j | j | j | j g
+ | _ | S(   Nt   Ui    t   Ai   t   Pi   t   Ri   t   Si   t   Fi   i   i   s
+   !HHLLBBHHHi    i   R   i   i   i   (   R	   R   t   thlt   optionsR%   R   R+   R7   R8   t   seqR/   R=   R   RB   R   R<   R1   (   R   R2   t   cflagst   _tcpt   tcpht   f(    (    s-   /root/Desktop/webby/dos/dos/Saddam/pinject.pyR+   ¤   sF    
+	
+
+
+	
+
+
+(   R
+   R
+   R   R   R+   (    (    (    s-   /root/Desktop/webby/dos/dos/Saddam/pinject.pyR6   l   s   		&t   UDPc           B   s#   e  Z d  d „ Z e j d „ Z RS(   R   c         C   s1   | |  _  | |  _ | |  _ d |  _ d |  _ d  S(   Ni    i   (   R
+   R   R%   R   R-   (   R   R
+   R   R%   (    (    s-   /root/Desktop/webby/dos/dos/Saddam/pinject.pyR   Ë   s
+    				c         C   sz   |  j  t |  j ƒ } t j d t j | ƒ t j | ƒ d | | ƒ } t | ƒ |  _ t j d |  j |  j	 | d ƒ } | S(   Ns   !4s4sBBHi    s   !HHHH(
+   R-   R   R%   R   R   R!   R"   R   R
+   R   (   R   R
+   R   R&   R-   t
+   pseudo_headerR2   (    (    s-   /root/Desktop/webby/dos/dos/Saddam/pinject.pyR   Ñ   s    		(   R
+   R
+   R   R!   t
+   IPPROTO_UDPR   (    (    (    s-   /root/Desktop/webby/dos/dos/Saddam/pinject.pyRX   Ê   s   c    
+   
+   C   sƒ  t  ƒ  }  |  j d d d d d d d d d	 d
+ ƒ|  j d
+ d d d
+ d d d d d	 d
+ ƒ|  j ƒ  \ } } | j d  k r‘ |  j ƒ  t j ƒ  n t j	 | j ƒ } | j
+ d  k rÊ t j	 t j
+ ƒ  ƒ } n	 | j
+ } d | GHd | GHd } d | GHt | | ƒ } t
+ d d ƒ } t | | d d d d d d ƒ} | r| j | ƒ }	 | |	 j } | j | ƒ }
+ d G|	 j GHd G|
+ j GHn  d  S(   Ns   -ss   --srct   destR
+   R   t   stringt   helps   Source IP addresst   metavarR   s   -ds   --dstR   s   Destination IP addresss   [+] Local Machine: %ss   [+] Remote Machine: %ss   TEST!!s   [+] Data to inject: %siÒ  iP   t   ifacet   eth0t   retryi   t   timeoutg333333Ó?s
+   IP Header:s
+   TCP Header:(   R    t
+   add_optiont
+   parse_argsR   t   Nonet
+   print_helpt   syst   exitR!   t
+   gethostbynameR
+   t
+   gethostnameR   R6   t   sendR+   R   R1   (
+   t   parserRR   t   argst   dst_hostt   src_hostR   t   ipobjt   tcpobjt   responset   ipt   tcp(    (    s-   /root/Desktop/webby/dos/dos/Saddam/pinject.pyt   mainÛ   s4    	
+
+
+
+				!
+t   __main__(    (   R!   R   t	   threadingt   timeRg   t   randomt   optparseR    R   R   R	   t   objectR   R   R6   RX   Ru   R
+   (    (    (    s-   /root/Desktop/webby/dos/dos/Saddam/pinject.pyt   <module>   s    	F^	"
